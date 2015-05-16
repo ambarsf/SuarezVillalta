@@ -26,17 +26,34 @@ bool FSCursor::insert(Object* data, int pos) {
     if (pos < 0 || pos > size)
         return false; // Fracaso en esta Operación
     // Al insertar se evaluan 3 condiciones
+    int neo;
+    neo= next.avail();
     if (pos == 0 && head == -1) { // Primero si se esta insertando al principio
-    }else if () { // 
-    } else { 
+        head=neo;
+        rows[head].prev=-1;
+        rows[head].next=-1;
+        rows[head].data=data;
+
+    }else if (pos==0 && head != -1){
+        rows[neo].prev=-1;
+        rows[neo].next=head;
+        rows[neo].data=data;
+        rows[head].prev=neo;
+        head=neo;
+    }else{
+        tmp=head;
+        for (int i = 0; i < pos; i++)
+        {
+            tmp=rows[tmp].next;
+        }
+        rows[neo].prev=tmp;
+        rows[neo].next=rows[tmp].next;
+        rows[neo].data=data;
+        rows[tmp].next=neo;
+        if (p<size)
+            rows[rows[neo].next].prev=neo;
     }
-    if (pos != size) // Se evalua si no se esta metiendo al final
-        for (int i = size; i > pos; i--) // Se recorre el arreglo de atras havia adelante
-            this->data[i] = this->data[i-1]; // Se mueven los elementos para poder insertar
-    this->data[pos] = data; // Se agregar el nuevo elemento
-    // Incremento del tamaño
-    size++;
-    // Éxito en la operación
+    
     return true;
 }
 /*
