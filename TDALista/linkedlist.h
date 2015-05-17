@@ -12,8 +12,13 @@
 * la lista, no es necesario tener size, pues lo heredamos de la clase base.
 */
 class LinkedList : public TDAList{
-  protected:
-    DLLNode* head;
+    struct Node{
+        Object* data;
+        Node* next;
+    };
+
+    Node* head;
+
   public:
     LinkedList();
     virtual ~LinkedList();
