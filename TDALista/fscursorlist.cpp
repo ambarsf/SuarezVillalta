@@ -8,7 +8,7 @@
 using namespace std;
 
 // Constructor por defecto de FSCursor
-FSCursor::FSCursor(int capacity){
+FSCursor::FSCursor(unsigned int capacity){
     this->capacity = capacity;
     rows = new Row[capacity];
     head = -1;

@@ -15,8 +15,10 @@ class FSCursor : public TDAList{
     int head;
     Row* rows;
     int capacity;
+    int size;
+
   public:
-    FSCursor(int);
+    FSCursor(unsigned int);
     virtual ~FSCursor();
     virtual bool insert(Object*, int) ;
     virtual int indexOf(Object*)const ;
@@ -32,5 +34,6 @@ class FSCursor : public TDAList{
     virtual bool isFull()const ;
     virtual int getCapacity()const;
     bool isEmpty()const ;
+    int avail() const;
 };
 

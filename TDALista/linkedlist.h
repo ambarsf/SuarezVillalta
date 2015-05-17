@@ -18,9 +18,10 @@ class LinkedList : public TDAList{
     };
 
     Node* head;
-
+    int size;
+    int capacity;
   public:
-    LinkedList();
+    LinkedList(unsigned int);
     virtual ~LinkedList();
     virtual bool insert(Object*, int) ;
     virtual int indexOf(Object*)const ;
@@ -34,6 +35,7 @@ class LinkedList : public TDAList{
     virtual void print()const ;
     virtual bool isFull()const ;
     virtual int getCapacity()const;
+
 };
 
 #endif

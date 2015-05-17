@@ -7,7 +7,8 @@
 #include <stddef.h>
 
 // Constructor por defecto de LinkedList
-LinkedList::LinkedList(){
+LinkedList::LinkedList(unsigned int capacity){
+    this->capacity = capacity;
     head = NULL;
     next = NULL;
 }
@@ -175,21 +176,24 @@ Object* LinkedList::last()const {
         tmp = tmp.next;
     return tmp.data;
 }
-// Imprime cada uno de los elementos que hay en la lista, llamando al método
-// print de cada nodo.
+
 void LinkedList::print()const {
-    DLLNode* tmp = head;
+    Node* tmp = head;
     for (int i=0; i < size; i++){
         tmp->print();
         tmp = tmp->getNext();
     }
 }
-// Retorna si la lista está llena, como nunca es así, retorna false siempre.
+
 bool LinkedList::isFull()const {
-    return false;
+    if (size==capacity){
+        return true;
+    }else{
+        return false;
+    }
 }
-// Retorna -1 indicando que no hay capacidad predeterminada
+
 int LinkedList::getCapacity()const{
-    return -1;
+    return capacity;
 }
 
