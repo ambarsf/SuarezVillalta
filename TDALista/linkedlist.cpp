@@ -74,12 +74,18 @@ int LinkedList::indexOf(Object* other)const {
 }
 // Consigue el elemento index de la lista, si index es una posición válida
 Object* LinkedList::get(unsigned index)const {
-    if (index < 0 || index >= size)
-        return NULL;
-    DLLNode* tmp = head;
-    for (int i=0; i < index; i++)
-        tmp = tmp->getNext();
-    return tmp->getData();
+    if (head==NULL){
+        throw "Lista no tiene Elementos";
+    }
+    if (index>size){
+        throw "Posicion no valida";
+    }
+    Node* tmp= head;
+    for (int i = 0; i < index; i++)
+    {
+        tmp=tmp.next;
+    }
+    return tmp.data;
 }
 /*
 * Borra un elemento de la lista, dada la posición del mismo. Se consideran
