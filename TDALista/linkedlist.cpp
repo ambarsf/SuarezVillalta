@@ -62,12 +62,12 @@ bool LinkedList::insert(Object* data, int pos) {
 * método el que determinará la igualdad de un objeto con otro.
 */
 int LinkedList::indexOf(Object* other)const {
-    DLLNode* tmp = head;
+    Node* tmp = head;
     for (int i=0; i < size; i++){
         // Compara cada uno de los elementos con el parámetro
-        if (tmp->getData()->equals(other))
+        if (tmp.data->equals(other))
                 return i;
-        tmp = tmp->getNext();
+        tmp = tmp.next;
     }
     // En el caso de no encontrarlo
     return -1;
@@ -162,17 +162,17 @@ void LinkedList::reset() {
 // Retorna el primer elemento de la lista, si es que hay alguno
 Object* LinkedList::first()const {
     if (head)
-        return head->getData();
+        return head.data;
     return NULL;
 }
 // Retorna el último elemento de la lista, si es que hay alguno
 Object* LinkedList::last()const {
     if (!head)
         return NULL;
-    DLLNode* tmp = head;
+    Node* tmp = head;
     for (int i=0; i < size; i++)
-        tmp = tmp->getNext();
-    return tmp->getData();
+        tmp = tmp.next;
+    return tmp.data;
 }
 // Imprime cada uno de los elementos que hay en la lista, llamando al método
 // print de cada nodo.
