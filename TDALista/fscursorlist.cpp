@@ -64,10 +64,14 @@ bool FSCursor::insert(Object* data, int pos) {
 * método el que determinará la igualdad de un objeto con otro.
 */
 int FSCursor::indexOf(Object* other)const {
+    int tmp=head;
     for (int i=0; i < size; i++){
         // Compara cada uno de los elementos con el parámetro
-        if (data[i]->equals(other))
-                return i;
+        if (rows[tmp].data->equals(other)){
+            int pos=rows[rows[tmp].prev].next;
+            return pos;
+        }
+        tmp = rows[tmp].next;
     }
     // En el caso de no encontrarlo
     return -1;
