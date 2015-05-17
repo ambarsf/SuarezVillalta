@@ -54,6 +54,7 @@ bool FSCursor::insert(Object* data, int pos) {
             rows[rows[neo].next].prev=neo;
     }
     
+    size++;
     return true;
 }
 /*
@@ -94,8 +95,9 @@ Object* FSCursor::remove(unsigned pos) {
 }
 // Retorna el primer elemento de la lista, si es que hay alguno
 Object* FSCursor::first()const {
-    if (!isEmpty())
-        return data[0];
+    if (rows!isEmpty()){
+        return rows[head].data;
+    }  
     return NULL;
 }
 // Retorna el último elemento de la lista, si es que hay alguno
