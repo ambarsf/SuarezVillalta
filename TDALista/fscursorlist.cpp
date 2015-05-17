@@ -143,6 +143,11 @@ int FSCursor::next(int pos) const {
     return -1;
 }
 void FSCursor::reset() {
+    for (int i = 0; i < size; i++)
+    {
+       rows[i].data=NULL
+    }
+    size=0;
 
 }
 bool FSCursor::erase(unsigned int pos) {
