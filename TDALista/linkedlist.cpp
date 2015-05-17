@@ -9,6 +9,7 @@
 // Constructor por defecto de LinkedList
 LinkedList::LinkedList(){
     head = NULL;
+    next = NULL;
 }
 // Super Destructor de LinkedList, nótese que llamará al destructor
 // de la clase DLLNode, que liberará todos los nodos siguientes...

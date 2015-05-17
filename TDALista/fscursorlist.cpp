@@ -158,3 +158,13 @@ bool FSCursor::erase(unsigned int pos) {
     size--; // Disminuir Tamaño
     return true; // Indicar Éxito
 }
+
+int FSCursor::avail() const{
+    for (int i = 0; i < capacity; i++)
+    {
+        if (rows[i].data == NULL){
+            return i;
+        }
+    }
+    return -1;
+}
