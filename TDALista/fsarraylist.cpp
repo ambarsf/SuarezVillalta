@@ -18,15 +18,13 @@ FSArrayList::~FSArrayList(){
 bool FSArrayList::insert(Object* data, int pos) {
     // Si la lista ya esta llena
     if (size == capacity) // No se pueden ingreasar mas elementos
-        //return false;
-        cout << "hola" << endl;
+        return false;
     // Si se desa meter en una posición inválida
     if (pos < 0 || pos > size)
         return false; // Fracaso en esta Operación
     if (pos != size) // Se evalua si no se esta metiendo al final
         for (int i = size; i > pos; i--) // Se recorre el arreglo de atras havia adelante
             this->data[i] = this->data[i-1]; // Se mueven los elementos para poder insertar
-    cout << size << "hola" << pos << "Cap:" << capacity << endl;
     this->data[pos] = data; // Se agregar el nuevo elemento
     // Incremento del tamaño
     size++;
@@ -52,6 +50,7 @@ int FSArrayList::indexOf(Object* other)const {
 Object* FSArrayList::get(unsigned index)const {
     if (index < 0 || index >= size)
         return NULL;
+    cout << index << endl;
     return data[index];
 }
 // Borra un elemento de la lista, dada la posición del mismo. 
@@ -71,13 +70,13 @@ Object* FSArrayList::remove(unsigned pos) {
 }
 // Retorna el primer elemento de la lista, si es que hay alguno
 Object* FSArrayList::first()const {
-    if (!isEmpty())
+    if (size > 0)
         return data[0];
     return NULL;
 }
 // Retorna el último elemento de la lista, si es que hay alguno
 Object* FSArrayList::last()const {
-    if (!isEmpty())
+    if (size > 0)
         return data[size-1];    
     return NULL;
 }
@@ -114,13 +113,16 @@ int FSArrayList::next(int pos) const {
     return -1;
 }
 void FSArrayList::reset() {
-
+ 
 }
 bool FSArrayList::erase(unsigned int pos) {
     // Si es una posición Inválida
     if (pos < 0 || pos >= size)
         return false; // Indicar fracaso en la operación
-    data[pos] = NULL;
+    cout << "1" << endl;
+    cout << this->data[pos] << endl;
+    this->data[pos] = NULL;
+    cout << "1" << endl;
     if (pos != size-1){ // Evalua si no se esta borrando el ultimo elemento
         for (int i = pos; i < size-1; i++)
             data[i] = data[i+1];

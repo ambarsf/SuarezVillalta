@@ -4,6 +4,9 @@
 // Para tener la definición del NULL sin declarar más identificadores
 // innecesarios
 #include <stddef.h>
+#include <iostream>
+
+using namespace std;
 
 // Constructor por defecto de LinkedList
 LinkedList::LinkedList(unsigned int capacity){
@@ -165,8 +168,9 @@ Object* LinkedList::first()const {
 Object* LinkedList::last()const {
     if (!head)
         return NULL;
+    
     Node* tmp = head;
-    for (int i=0; i < size; i++)
+    for (int i=0; i < size-1; i++)
         tmp = tmp->next;
     return tmp->data;
 }

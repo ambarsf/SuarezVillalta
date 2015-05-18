@@ -40,7 +40,15 @@ bool FSCursor::insert(Object* data, int pos) {
         rows[neo].data=data;
         rows[head].prev=neo;
         head=neo;
-    }else{
+    }/*else if(pos == size){
+        int ret = head;
+        while (rows[ret].next != -1){
+            ret = rows[ret].next;
+        }
+        rows[neo].prev = ret;
+        rows[ret].next = neo;
+        rows[neo].next = -1;
+    }*/else{
         int tmp=head;
         for (int i = 0; i < pos; i++)
         {
@@ -66,8 +74,10 @@ bool FSCursor::insert(Object* data, int pos) {
 int FSCursor::indexOf(Object* other)const {
     int tmp=head;
     for (int i=0; i < size; i++){
+        cout << "entra:" << i << endl;
         // Compara cada uno de los elementos con el parámetro
-        if (rows[tmp].data->equals(other)){
+        if (rows[tmp].data == other){
+            cout << "E" << endl;
             int pos=rows[rows[tmp].prev].next;
             return pos;
         }
@@ -123,20 +133,20 @@ Object* FSCursor::remove(unsigned pos) {
 }
 // Retorna el primer elemento de la lista, si es que hay alguno
 Object* FSCursor::first()const {
-    if (!isEmpty()){
+    if (size > 0){
         return rows[head].data;
     }  
     return NULL;
 }
 // Retorna el último elemento de la lista, si es que hay alguno
 Object* FSCursor::last()const {
-    if (!isEmpty())
+    if (size > 0){
         for (int i = 0; i < size; ++i){
-            if (rows[i].data != NULL)
-                if (rows[i].next == -1){
+            if(rows[i].data != NULL)
+                if (rows[i].next == -1)
                     return rows[i].data;
-                }
         }
+    }
     return NULL;
 }
 // Imprime cada uno de los elementos que hay en la lista, llamando al método
