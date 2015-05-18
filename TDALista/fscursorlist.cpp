@@ -80,19 +80,43 @@ int FSCursor::indexOf(Object* other)const {
 Object* FSCursor::get(unsigned index)const {
     if (index < 0 || index >= size)
         return NULL;
-    return data[index];
+    int cont = 0, num = head;
+    while (cont != index){
+        num = rows[num].next;
+        cont++;
+    }
+    return rows[num];
 }
 // Borra un elemento de la lista, dada la posición del mismo. 
 Object* FSCursor::remove(unsigned pos) {
     // Si es una posición Inválida
     if (pos < 0 || pos >= size)
         return NULL; // Indicar fracaso en la operación
-    Object* retVal = data[pos];
-    data[pos] = NULL;
-    if (pos != size-1){ // Evalua si no se esta borrando el ultimo elemento
-        for (int i = pos; i < size-1; i++)
-            data[i] = data[i+1];
-        data[size-1] = NULL;
+    Object* retVal;
+    if (pos == 0) { // Primero si se esta eliminando al principio se tiene que cambiar head
+        rows[rows[head].next].prev = -1;
+        head = rows[head].next;
+        retVal = rows[head]
+        rows[head] = NULL;
+    }else if (pos == size) { // Si se desea eliminar la ultima posicion del arreglo 
+        for (int i = 0; i < size; ++i)
+            if (rows[i] != NULL)
+                if (rows[i].next == -1){
+                    rows[rows[i].prev].next = -1;
+                    retVal = rows[i]
+                    rows[i] = NULL;
+                    break;
+                }
+    } else { // Si se desea insertar en medio
+        int cont = 0, num = head;
+        while (cont != pos){
+            num = rows[num].next;
+            cont++;
+        }
+        rows[rows[num].prev].next = rows[num].next;
+        rows[rows[num].next].prev = rows[num].prev;
+        retVal = rows[num]
+        rows[num] = NULL;
     }
     size--; // Disminuir Tamaño
     return retVal; // Indicar Éxito
@@ -106,8 +130,13 @@ Object* FSCursor::first()const {
 }
 // Retorna el último elemento de la lista, si es que hay alguno
 Object* FSCursor::last()const {
-    if (!isEmpty())
-        return data[size-1];    
+    if (rows!isEmpty())
+        for (int i = 0; i < size; ++i){
+            if (rows[i] != NULL)
+                if (rows[i].next == -1){
+                    return rows[i];
+                }
+        }
     return NULL;
 }
 // Imprime cada uno de los elementos que hay en la lista, llamando al método
