@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
         {
            case 1:           
               
-              /*for (int i = 1; i < 1000; ++i){
+              for (int i = 1; i < 1000; ++i){
                 listaLinked = new LinkedList(i);
 
                 clock_t empiezaLinked = clock();
@@ -51,8 +51,8 @@ int main(int argc, char *argv[])
                 cout << secLinked << endl;
                 delete listaLinked;
               }
-              cout << "***********************************************************" << endl;*/
-              for (int i = 0; i < 1000; ++i){
+              cout << "***********************************************************" << endl;
+              for (int i = 1; i < 1000; ++i){
                 listaArray = new FSArrayList(i);
 
                 clock_t empiezaArray = clock();
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
                 delete listaArray;
               }
               cout << "***********************************************************" << endl;
-              /*for (int i = 0; i < 1000; ++i){
+              for (int i = 1; i < 1000; ++i){
                 listaCursor = new FSCursor(i);
 
                 clock_t empiezaCursor = clock();
@@ -76,14 +76,18 @@ int main(int argc, char *argv[])
                 double secCursor = double(finalCursor - empiezaCursor) / CLOCKS_PER_SEC;
                 cout << secCursor << endl;
                 delete listaCursor;
-              }*/
-           /*case 2:
+              }
+           case 2:
                for (int i = 1; i < 1000; ++i){
                 listaLinked = new LinkedList(i);
 
+                for (int j = 0; j < i; ++j){
+                  listaLinked->insert(0,j);
+                }
+
                 clock_t empiezaLinked = clock();
                 for (int j = 0; j < i; ++j){
-                  listaLinked->erase(0,j);
+                  listaLinked->erase(j);
                 }
                 clock_t finalLinked = clock();
                 double secLinked = double(finalLinked - empiezaLinked) / CLOCKS_PER_SEC;
@@ -91,7 +95,7 @@ int main(int argc, char *argv[])
                 delete listaLinked;
               }
               cout << "***********************************************************" << endl;
-              for (int i = 0; i < 1000; ++i){
+              /*for (int i = 1; i < 1000; ++i){
                 listaArray = new FSArrayList(i);
 
                 clock_t empiezaArray = clock();
@@ -104,7 +108,7 @@ int main(int argc, char *argv[])
                 delete listaArray;
               }
               cout << "***********************************************************" << endl;
-              for (int i = 0; i < 1000; ++i){
+              for (int i = 1; i < 1000; ++i){
                 listaCursor = new FSCursor(i);
 
                 clock_t empiezaCursor = clock();
@@ -116,7 +120,7 @@ int main(int argc, char *argv[])
                 cout << secCursor << endl;
                 delete listaCursor;
               }
-           case 3:
+           /*case 3:
                lista->print();
                break;
            case 4:
