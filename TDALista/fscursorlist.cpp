@@ -1,4 +1,3 @@
-
 #include "object.h"
 #include "tdalist.h"
 #include "fscursorlist.h"
