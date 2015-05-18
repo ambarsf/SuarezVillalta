@@ -34,6 +34,6 @@ class FSCursor : public TDAList{
     virtual bool isFull()const ;
     virtual int getCapacity()const;
     bool isEmpty()const ;
-    int avail() const;
+    int avail() ;
 };
 
