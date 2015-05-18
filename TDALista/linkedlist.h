@@ -2,7 +2,6 @@
 #define LINKEDLIST_H
 #include "object.h"
 #include "tdalist.h"
-#include "dllnode.h"
 /*
 * Declaración de la Clase LinkedList, que es una implementación del TDAList
 * utilizando listas doblemente enlazadas. Nótese la herencia en esta clase.
