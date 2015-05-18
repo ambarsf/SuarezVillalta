@@ -9,7 +9,6 @@
 LinkedList::LinkedList(unsigned int capacity){
     this->capacity = capacity;
     head = NULL;
-    next = NULL;
 }
 // Super Destructor de LinkedList, nótese que llamará al destructor
 // de la clase DLLNode, que liberará todos los nodos siguientes...
@@ -33,22 +32,22 @@ bool LinkedList::insert(Object* data, int pos) {
     if (neo==NULL){
         throw "No Memory";
     }
-    neo.data=data;
-    neo.next=NULL;
+    neo->data=data;
+    neo->next=NULL;
     if (!head){
         head=neo;
     }else{
         if (pos==0){
-            neo.next=head;
+            neo->next=head;
             head=neo;
         }else{
             Node* tmp=head;
             for (int i = 0; i < pos-1; i++)
             {
-                tmp=tmp.next;
+                tmp=tmp->next;
             }
-            neo.next=tmp.next;
-            tmp.next=neo;
+            neo->next=tmp->next;
+            tmp->next=neo;
         }
     }
     // Incremento del tamaño
@@ -66,9 +65,9 @@ int LinkedList::indexOf(Object* other)const {
     Node* tmp = head;
     for (int i=0; i < size; i++){
         // Compara cada uno de los elementos con el parámetro
-        if (tmp.data->equals(other))
+        if (tmp->data->equals(other))
                 return i;
-        tmp = tmp.next;
+        tmp = tmp->next;
     }
     // En el caso de no encontrarlo
     return -1;
@@ -84,9 +83,9 @@ Object* LinkedList::get(unsigned index)const {
     Node* tmp= head;
     for (int i = 0; i < index; i++)
     {
-        tmp=tmp.next;
+        tmp=tmp->next;
     }
-    return tmp.data;
+    return tmp->data;
 }
 /*
 * Borra un elemento de la lista, dada la posición del mismo. Se consideran
@@ -159,7 +158,7 @@ void LinkedList::reset() {
 // Retorna el primer elemento de la lista, si es que hay alguno
 Object* LinkedList::first()const {
     if (head)
-        return head.data;
+        return head->data;
     return NULL;
 }
 // Retorna el último elemento de la lista, si es que hay alguno
@@ -168,15 +167,15 @@ Object* LinkedList::last()const {
         return NULL;
     Node* tmp = head;
     for (int i=0; i < size; i++)
-        tmp = tmp.next;
-    return tmp.data;
+        tmp = tmp->next;
+    return tmp->data;
 }
 
 void LinkedList::print()const {
     Node* tmp = head;
     for (int i=0; i < size; i++){
-        tmp->print();
-        tmp = tmp->getNext();
+        //tmp->print();
+        //tmp = tmp->getNext();
     }
 }
 
