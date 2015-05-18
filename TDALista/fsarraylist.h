@@ -13,6 +13,7 @@ class FSArrayList : public TDAList{
   protected:
     int capacity;
     Object ** data;
+    int size;
   public:
     FSArrayList(int);
     virtual ~FSArrayList();

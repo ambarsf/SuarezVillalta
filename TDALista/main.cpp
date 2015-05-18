@@ -52,11 +52,11 @@ int main(int argc, char *argv[])
                 delete listaLinked;
               }
               cout << "***********************************************************" << endl;*/
-              for (int i = 0; i < 1000; ++i){
+              for (int i = 1; i < 1000; i++){
                 listaArray = new FSArrayList(i);
 
                 clock_t empiezaArray = clock();
-                for (int j = 0; j < i; ++j){
+                for (int j = 0; j < i; j++){
                   listaArray->insert(0,j);
                 }
                 clock_t finalArray = clock();
