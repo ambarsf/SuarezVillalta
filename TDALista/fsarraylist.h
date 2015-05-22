@@ -14,7 +14,6 @@ class FSArrayList : public TDAList{
     int capacity;
     int size;
     Object ** data;
-    int size;
   public:
     FSArrayList(int);
     virtual ~FSArrayList();

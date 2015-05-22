@@ -10,11 +10,8 @@ using namespace std;
 // Constructor por defecto de FSArrayList
 FSArrayList::FSArrayList(int capacity){
     this->capacity = capacity;
-<<<<<<< HEAD
     size =-1;
-=======
     size = -1;
->>>>>>> c783b15eb873f9a6090c4fa2365f81e0795ea66f
 }
 FSArrayList::~FSArrayList(){
 }
@@ -30,12 +27,8 @@ bool FSArrayList::insert(Object* data, int pos) {
     if (pos != size) // Se evalua si no se esta metiendo al final
         for (int i = size; i > pos; i--)// Se recorre el arreglo de atras havia adelante
             this->data[i] = this->data[i-1]; // Se mueven los elementos para poder insertar
-<<<<<<< HEAD
     	this->data[pos] = data; // Se agregar el nuevo elemento
-=======
-    cout << size << "hola" << pos << "Cap:" << capacity << endl;
     this->data[pos] = data; // Se agregar el nuevo elemento
->>>>>>> c783b15eb873f9a6090c4fa2365f81e0795ea66f
     // Incremento del tamaño
     size++;
     // Éxito en la operación
