@@ -37,12 +37,18 @@ int p = 0;
 		case 1:{
 			int resultados[1000][2];
 			for (int i = 1; i <= 1000; ++i){ //Insert
-				lista = new LinkedList(i);
+				lista = new FSArrayList(i);	// ********   Para probar otro tipo solo cambiar esta linea    ********
 				clock_t empiezaInsert = clock();
 				y = 0;
 				cout << lista->getSize() << endl;
 				for (int j = 0; j < i; ++j){
-					lista->insert(0,p);
+					if (lista->insert(new Integer(0), p) ) //;
+						cout << lista->getSize() << endl;
+					//if (i == 3){ // LinkedList
+					//	cout << "Este es el objeto" << endl; // LinkedList
+					//	lista->get(0)->print() ; // LinkedList
+					//	cout << endl << "Tamano" << lista->getSize() << endl; // LinkedList
+					//}
 					p = rand() % lista->getSize();
 				}
 				clock_t finalInsert = clock();

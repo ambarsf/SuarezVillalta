@@ -1,9 +1,10 @@
 #include "object.h"
 #include "tdalist.h"
 #include "linkedlist.h"
-// Para tener la definición del NULL sin declarar más identificadores
-// innecesarios
 #include <stddef.h>
+#include <iostream>
+
+using namespace std;
 
 // Constructor por defecto de LinkedList
 LinkedList::LinkedList(unsigned int capacity){
@@ -42,8 +43,7 @@ bool LinkedList::insert(Object* data, int pos) {
             head=neo;
         }else{
             Node* tmp=head;
-            for (int i = 0; i < pos-1; i++)
-            {
+            for (int i = 0; i < pos-1; i++){
                 tmp=tmp->next;
             }
             neo->next=tmp->next;
@@ -80,10 +80,9 @@ Object* LinkedList::get(unsigned index)const {
     if (index>size){
         throw "Posicion no valida";
     }
-    Node* tmp= head;
-    for (int i = 0; i < index; i++)
-    {
-        tmp=tmp->next;
+    Node* tmp = head;
+    for (int i = 0; i < index; i++){
+        tmp = tmp->next;
     }
     return tmp->data;
 }

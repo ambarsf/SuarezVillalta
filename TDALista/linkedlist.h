@@ -17,7 +17,6 @@ class LinkedList : public TDAList{
     };
 
     Node* head;
-    int size;
     int capacity;
   public:
     LinkedList(unsigned int);

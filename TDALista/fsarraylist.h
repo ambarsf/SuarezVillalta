@@ -12,7 +12,6 @@
 class FSArrayList : public TDAList{
   protected:
     int capacity;
-    int size;
     Object ** data;
   public:
     FSArrayList(int);
