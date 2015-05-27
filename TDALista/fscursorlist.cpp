@@ -19,39 +19,41 @@ FSCursor::~FSCursor(){
 // Inserción en la lista
 bool FSCursor::insert(Object* data, int pos) {
 	// Si la lista ya esta llena
-	if (size == capacity) // No se pueden ingreasar mas elementos
+	if (size == capacity){ // No se pueden ingreasar mas elementos
 		return false;
 	// Si se desa meter en una posición inválida
-	if (pos < 0 || pos > size)
+	}else if (pos < 0 || pos > size){
 		return false; // Fracaso en esta Operación
-	// Al insertar se evaluan 3 condiciones
-	int neo;
-	neo = avail();
-	if (pos == 0 && head == -1) { // Primero si se esta insertando al principio
-		head = neo;
-		rows[head].prev = -1;
-		rows[head].next = -1;
-		rows[head].data = data;
-	}else if (pos==0 && head != -1){
-		rows[neo].prev = -1;
-		rows[neo].next = head;
-		rows[neo].data = data;
-		rows[head].prev = neo;
-		head = neo;
 	}else{
-		int tmp = head;
-		for (int i = 0; i < pos; i++){
-			tmp = rows[tmp].next;
+	// Al insertar se evaluan 3 condiciones
+		int neo;
+		neo = avail();
+		if (pos == 0 && head == -1) { // Primero si se esta insertando al principio
+			head = neo;
+			rows[head].prev = -1;
+			rows[head].next = -1;
+			rows[head].data = data;
+		}else if (pos==0 && head != -1){
+			rows[neo].prev = -1;
+			rows[neo].next = head;
+			rows[neo].data = data;
+			rows[head].prev = neo;
+			head = neo;
+		}else{
+			int tmp = head;
+			for (int i = 0; i < pos; i++){
+				tmp = rows[tmp].next;
+			}
+			rows[neo].prev = tmp;
+			rows[neo].next = rows[tmp].next;
+			rows[neo].data = data;
+			rows[tmp].next = neo;
+			if (pos<size)
+				rows[rows[neo].next].prev = neo;
 		}
-		rows[neo].prev = tmp;
-		rows[neo].next = rows[tmp].next;
-		rows[neo].data = data;
-		rows[tmp].next = neo;
-		if (pos<size)
-			rows[rows[neo].next].prev = neo;
+		size++;
+		return true;
 	}
-	size++;
-	return true;
 }
 /*
 * Búsqueda del índice (posición) de un objeto
@@ -72,48 +74,52 @@ int FSCursor::indexOf(Object* other)const {
 }
 // Consigue el elemento index de la lista, si index es una posición válida
 Object* FSCursor::get(unsigned index)const {
-	if (index < 0 || index >= size)
+	if (index < 0 || index >= size){
 		return NULL;
-	int cont = 0, num = head;
-	while (cont != index){
-		num = rows[num].next;
-		cont++;
+	}else{
+		int cont = 0, num = head;
+		while (cont != index){
+			num = rows[num].next;
+			cont++;
+		}
+		return rows[num].data;
 	}
-	return rows[num].data;
 }
 // Borra un elemento de la lista, dada la posición del mismo.
 Object* FSCursor::remove(unsigned pos) {
 	// Si es una posición Inválida
-	if (pos < 0 || pos >= size)
+	if (pos < 0 || pos >= size){
 		return NULL; // Indicar fracaso en la operación
-	Object* retVal;
-	if (pos == 0) { // Primero si se esta eliminando al principio se tiene que cambiar head
-		rows[rows[head].next].prev = -1;
-		head = rows[head].next;
-		retVal = rows[head].data;
-		rows[head].data = NULL;
-	}else if (pos == size) { // Si se desea eliminar la ultima posicion del arreglo
-		for (int i = 0; i < size; ++i)
-			if (rows[i].data != NULL)
-				if (rows[i].next == -1){
-					rows[rows[i].prev].next = -1;
-					retVal = rows[i].data;
-					rows[i].data = NULL;
-					break;
-				}
-	} else { // Si se desea insertar en medio
-		int cont = 0, num = head;
-		while (cont != pos){
-			num = rows[num].next;
-			cont++;
+	}else{
+		Object* retVal;
+		if (pos == 0) { // Primero si se esta eliminando al principio se tiene que cambiar head
+			rows[rows[head].next].prev = -1;
+			head = rows[head].next;
+			retVal = rows[head].data;
+			rows[head].data = NULL;
+		}else if (pos == size) { // Si se desea eliminar la ultima posicion del arreglo
+			for (int i = 0; i < size; ++i)
+				if (rows[i].data != NULL)
+					if (rows[i].next == -1){
+						rows[rows[i].prev].next = -1;
+						retVal = rows[i].data;
+						rows[i].data = NULL;
+						break;
+					}
+		} else { // Si se desea insertar en medio
+			int cont = 0, num = head;
+			while (cont != pos){
+				num = rows[num].next;
+				cont++;
+			}
+			rows[rows[num].prev].next = rows[num].next;
+			rows[rows[num].next].prev = rows[num].prev;
+			retVal = rows[num].data;
+			rows[num].data = NULL;
 		}
-		rows[rows[num].prev].next = rows[num].next;
-		rows[rows[num].next].prev = rows[num].prev;
-		retVal = rows[num].data;
-		rows[num].data = NULL;
+		size--; // Disminuir Tamaño
+		return retVal; // Indicar Éxito\
 	}
-	size--; // Disminuir Tamaño
-	return retVal; // Indicar Éxito
 }
 // Retorna el primer elemento de la lista, si es que hay alguno
 Object* FSCursor::first()const {
@@ -171,17 +177,20 @@ void FSCursor::reset() {
 }
 bool FSCursor::erase(unsigned int pos) {
 	// Si es una posición Inválida
-	if (pos < 0 || pos >= size)
+	if (pos < 0 || pos >= size){
 		return false; // Indicar fracaso en la operación
-	rows[pos].data = NULL;
-	if (pos != size-1){ // Evalua si no se esta borrando el ultimo elemento
-		for (int i = pos; i < size-1; i++)
-			rows[i].data = rows[i+1].data;
-		rows[size-1].data = NULL;
+	}else{
+		rows[pos].data = NULL;
+		if (pos != size-1){ // Evalua si no se esta borrando el ultimo elemento
+			for (int i = pos; i < size-1; i++)
+				rows[i].data = rows[i+1].data;
+			rows[size-1].data = NULL;
+		}
+		size--; // Disminuir Tamaño
+		return true; // Indicar Éxito
 	}
-	size--; // Disminuir Tamaño
-	return true; // Indicar Éxito
 }
+
 int FSCursor::avail() {
 	for (int i = 0; i < capacity; i++){
 		if (rows[i].data == NULL){
