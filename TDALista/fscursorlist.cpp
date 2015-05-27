@@ -88,7 +88,7 @@ Object* FSCursor::get(unsigned index)const {
 	}
 }
 // Borra un elemento de la lista, dada la posición del mismo.
-/*Object* FSCursor::remove(unsigned pos){
+Object* FSCursor::remove(unsigned pos){
 	// Si es una posición Inválida
 	if (pos < 0 || pos >= size){
 		return NULL; // Indicar fracaso en la operación
@@ -124,7 +124,8 @@ Object* FSCursor::get(unsigned index)const {
 		size--; // Disminuir Tamaño
 		return retVal; // Indicar Éxito\
 	}
-}*/
+}
+}
 // Retorna el primer elemento de la lista, si es que hay alguno
 Object* FSCursor::first()const {
 	if (!isEmpty()){
