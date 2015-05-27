@@ -10,8 +10,12 @@ using namespace std;
 // Constructor por defecto de FSArrayList
 FSArrayList::FSArrayList(int capacity){
     this->capacity = capacity;
+    data = new Object*[capacity];
 }
 FSArrayList::~FSArrayList(){
+    for (int i = 0; i < size; ++i){
+        delete data[i];
+    }
 }
 // Inserción en la lista
 bool FSArrayList::insert(Object* data, int pos) {
@@ -24,11 +28,7 @@ bool FSArrayList::insert(Object* data, int pos) {
     if (pos != size) // Se evalua si no se esta metiendo al final
         for (int i = size; i > pos; i--)// Se recorre el arreglo de atras hacia adelante
             this->data[i] = this->data[i-1]; // Se mueven los elementos para poder insertar
-    //cout << "Data = ";
-    //data->print();
-    //cout << "Pos = " << pos << endl;
     this->data[pos] = data; // Se agregar el nuevo elemento
-    //cout << "no pasa" << endl;
     // Incremento del tamaño
     size++;
     // Éxito en la operación
@@ -62,11 +62,10 @@ Object* FSArrayList::remove(unsigned pos) {
         return NULL; // Indicar fracaso en la operación
     Object* retVal = data[pos];
     data[pos] = NULL;
-    if (pos != size-1){ // Evalua si no se esta borrando el ultimo elemento
+    if (pos != size-1) // Evalua si no se esta borrando el ultimo elemento
         for (int i = pos; i < size-1; i++)
             data[i] = data[i+1];
-        data[size-1] = NULL;
-    }
+    data[size-1] = NULL;
     size--; // Disminuir Tamaño
     return retVal; // Indicar Éxito
 }
@@ -115,18 +114,17 @@ int FSArrayList::next(int pos) const {
     return -1;
 }
 void FSArrayList::reset() {
-
 }
 bool FSArrayList::erase(unsigned int pos) {
-    // Si es una posición Inválida
+     // Si es una posición Inválida
     if (pos < 0 || pos >= size)
-        return false; // Indicar fracaso en la operación
+        return NULL; // Indicar fracaso en la operación
+    Object* retVal = data[pos];
     data[pos] = NULL;
-    if (pos != size-1){ // Evalua si no se esta borrando el ultimo elemento
+    if (pos != size-1) // Evalua si no se esta borrando el ultimo elemento
         for (int i = pos; i < size-1; i++)
             data[i] = data[i+1];
-        data[size-1] = NULL;
-    }
+    data[size-1] = NULL;
     size--; // Disminuir Tamaño
-    return true; // Indicar Éxito
+    return retVal; // Indicar Éxito
 }

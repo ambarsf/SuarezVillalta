@@ -20,7 +20,7 @@ using namespace std;
 */
 
 int menu();
-void imprimir(int[1000][2]);
+void imprimir(double[1000][2]);
 
 int main(int argc, char *argv[]){
 // En el caso de que quisieramos utilizar otra implementación
@@ -35,7 +35,7 @@ int p = 0;
 	while (flag){
 	switch(menu()){
 		case 1:{
-			int resultados[1000][2];
+			double resultados[1000][2];
 			for (int i = 1; i <= 1000; ++i){ //Insert
 				lista = new FSArrayList(i);	// ********   Para probar otro tipo solo cambiar esta linea    ********
 				clock_t empiezaInsert = clock();
@@ -54,17 +54,16 @@ int p = 0;
 				clock_t finalInsert = clock();
 				double tiempoInsert = double(finalInsert - empiezaInsert) / CLOCKS_PER_SEC;
 				resultados[x][y] = tiempoInsert;
-				cout << "Paso Insert" << endl;
 
 				clock_t empiezaRemove = clock();
 				y = 1;
 				for (int j = 0; j < i; ++j){ // Remove
-					lista->erase(j);
+					p = rand() % lista->getSize();
+					lista->erase(p);
 				}
 				clock_t finalRemove = clock();
 				double tiempoRemove = double(finalRemove - empiezaRemove) / CLOCKS_PER_SEC;
 				resultados[x][y] = tiempoRemove;
-				cout << "Paso Remove" << endl;
 
 				x++;
 				delete lista;
@@ -122,10 +121,10 @@ int menu(){
 return opcion;
 }
 
-void imprimir(int resultados[1000][2]){
+void imprimir(double resultados[1000][2]){
 	for (int i = 0; i < 1000; ++i){
 		for (int j = 0; j < 2; ++j){
-			cout << resultados[i][j];
+			cout << resultados[i][j] << "\t";
 		}
 		cout << endl;
 	}

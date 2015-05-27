@@ -135,7 +135,7 @@ Object* FSCursor::last()const {
 // print de cada nodo.
 void FSCursor::print()const {
 	for (int i=0; i < size; i++){
-		cout << rows[i].data->print() << " ";
+		rows[i].data->print();
 	}
 }
 // Retorna si la lista está llena, como nunca es así, retorna false siempre.
