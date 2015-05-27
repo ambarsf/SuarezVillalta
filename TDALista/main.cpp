@@ -40,7 +40,6 @@ int p = 0;
 				lista = new FSCursor(i);	// ********   Para probar otro tipo solo cambiar esta linea    ********
 				clock_t empiezaInsert = clock();
 				y = 0;
-				cout << lista->getSize() << endl;
 				for (int j = 0; j < i; ++j){
 					if (lista->insert(new Integer(0), p) ) //;
 						cout << lista->getSize() << endl;

@@ -15,7 +15,6 @@ class FSCursor : public TDAList{
     int head;
     Row* rows;
     int capacity;
-    int size;
 
   public:
     FSCursor(unsigned int);
