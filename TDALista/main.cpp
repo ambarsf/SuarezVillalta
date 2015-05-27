@@ -37,7 +37,7 @@ int p = 0;
 		case 1:{
 			double resultados[1000][2];
 			for (int i = 1; i <= 1000; ++i){ //Insert
-				lista = new FSArrayList(i);	// ********   Para probar otro tipo solo cambiar esta linea    ********
+				lista = new FSCursor(i);	// ********   Para probar otro tipo solo cambiar esta linea    ********
 				clock_t empiezaInsert = clock();
 				y = 0;
 				cout << lista->getSize() << endl;

@@ -11,8 +11,9 @@ FSCursor::FSCursor(unsigned int capacity){
 	this->capacity = capacity;
 	rows = new Row[capacity];
 	head = -1;
-	if(!rows)
-	throw "No Memory";
+	if(!rows){
+		throw "No Memory";
+	}
 }
 FSCursor::~FSCursor(){
 }
@@ -48,8 +49,9 @@ bool FSCursor::insert(Object* data, int pos) {
 			rows[neo].next = rows[tmp].next;
 			rows[neo].data = data;
 			rows[tmp].next = neo;
-			if (pos<size)
+			if (pos<size){
 				rows[rows[neo].next].prev = neo;
+			}
 		}
 		size++;
 		return true;
@@ -98,14 +100,16 @@ Object* FSCursor::remove(unsigned pos) {
 			retVal = rows[head].data;
 			rows[head].data = NULL;
 		}else if (pos == size) { // Si se desea eliminar la ultima posicion del arreglo
-			for (int i = 0; i < size; ++i)
-				if (rows[i].data != NULL)
+			for (int i = 0; i < size; ++i){
+				if (rows[i].data != NULL){
 					if (rows[i].next == -1){
 						rows[rows[i].prev].next = -1;
 						retVal = rows[i].data;
 						rows[i].data = NULL;
 						break;
 					}
+				}
+			}
 		} else { // Si se desea insertar en medio
 			int cont = 0, num = head;
 			while (cont != pos){
@@ -123,18 +127,22 @@ Object* FSCursor::remove(unsigned pos) {
 }
 // Retorna el primer elemento de la lista, si es que hay alguno
 Object* FSCursor::first()const {
-	if (!isEmpty())
+	if (!isEmpty()){
 		return rows[head].data;
+	}
 	return NULL;
 }
 // Retorna el último elemento de la lista, si es que hay alguno
 Object* FSCursor::last()const {
-	if (!isEmpty())
+	if (!isEmpty()){
 		for (int i = 0; i < size; ++i){
-			if (rows[i].data != NULL)
-				if (rows[i].next == -1)
+			if (rows[i].data != NULL){
+				if (rows[i].next == -1){
 					return rows[i].data;
+				}
+			}
 		}
+	}
 	return NULL;
 }
 // Imprime cada uno de los elementos que hay en la lista, llamando al método
@@ -156,17 +164,19 @@ bool FSCursor::isEmpty()const {
 	return size == 0 ;
 }
 int FSCursor::prev(int pos) const {
-	if (pos < 1)
+	if (pos < 1){
 		return -1;
-	if (!isEmpty())
+	}else if (!isEmpty()){
 		return pos-1;
+	}
 	return -1;
 }
 int FSCursor::next(int pos) const {
-	if (pos == size)
+	if (pos == size){
 		return -1;
-	if (!isEmpty())
+	} else if (!isEmpty()){
 		return pos+1;
+	}
 	return -1;
 }
 void FSCursor::reset() {
@@ -182,8 +192,9 @@ bool FSCursor::erase(unsigned int pos) {
 	}else{
 		rows[pos].data = NULL;
 		if (pos != size-1){ // Evalua si no se esta borrando el ultimo elemento
-			for (int i = pos; i < size-1; i++)
+			for (int i = pos; i < size-1; i++){
 				rows[i].data = rows[i+1].data;
+			}
 			rows[size-1].data = NULL;
 		}
 		size--; // Disminuir Tamaño
